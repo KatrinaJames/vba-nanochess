@@ -1,2 +1,2 @@
-# vba-nanochess
-Toledo nanochess written in Excel and VBA
+# Nanochess
+Toledo nanochess written in Excel and VBA.
