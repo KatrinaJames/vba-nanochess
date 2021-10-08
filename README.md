@@ -1,7 +1,7 @@
 # VBA Nanochess
 Toledo nanochess written in Excel and VBA.
 ![Chess1](images/Chess1.PNG?raw=true "Chess1")
-![Chess2](Chess1.Gif)
+![Chess2](./Chess1.Gif)
 
 ## How to Play
 - Click the New Game button to begin
