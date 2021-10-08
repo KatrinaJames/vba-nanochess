@@ -125,6 +125,7 @@ End Sub
 Public Sub yy(ByVal s As Integer)
 
     Dim dummy As Long
+    Dim difficulty As Integer
 
     i = (ii(s) Xor y) And z
     If i > 8 Then
@@ -139,8 +140,8 @@ Public Sub yy(ByVal s As Integer)
                 Dim cell As Range
                 
                 With ThisWorkbook
-                    Dim optionsRange As Range: Set optionsRange = ThisWorkbook.Sheets("hidden").Range("OPTIONS")
-                    Dim pawnPromotion As Range: Set pawnPromotion = ThisWorkbook.Sheets(SHEET_NAME).Range("UPGRADE")
+                    Dim optionsRange As Range: Set optionsRange = .Sheets("hidden").Range("OPTIONS")
+                    Dim pawnPromotion As Range: Set pawnPromotion = .Sheets(SHEET_NAME).Range("UPGRADE")
                 End With
                 
                 If pawnPromotion.value = "" Then
@@ -157,8 +158,26 @@ BREAK:
                 i = 14 - (index - 1) Xor y
             End If
             dummy = xx(0, 0, 0, 21, u, 1)
+            
+            With ThisWorkbook
+                Dim difficultyRange As Range: Set difficultyRange = .Sheets(SHEET_NAME).Range("DIFFICULTY")
+                Dim difficultiesRange As Range: Set difficultiesRange = .Sheets("hidden").Range("DIFFICULTIES")
+            End With
+            
+            difficulty = 1
+            If difficultyRange.value <> "" Then
+                For Each cell In difficultiesRange
+                    If cell.value = difficultyRange.value Then
+                        GoTo END_FOR
+                    Else
+                        difficulty = difficulty + 1
+                    End If
+                Next cell
+            End If
+END_FOR:
+            
             If y > 0 Then
-                dummy = xx(0, 0, 0, 21, u, 2)
+                dummy = xx(0, 0, 0, 21, u, (difficulty + 1))
                 dummy = xx(0, 0, 0, 21, u, 1)
             End If
         End If
