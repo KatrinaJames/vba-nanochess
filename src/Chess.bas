@@ -150,11 +150,11 @@ Public Sub yy(ByVal s As Integer)
                     For Each cell In optionsRange
                         index = index + 1
                         If cell.value = pawnPromotion.value Then
-                            GoTo BREAK
+                            Exit For
                         End If
                     Next cell
                 End If
-BREAK:
+
                 i = 14 - (index - 1) Xor y
             End If
             dummy = xx(0, 0, 0, 21, u, 1)
@@ -164,17 +164,17 @@ BREAK:
                 Dim difficultiesRange As Range: Set difficultiesRange = .Sheets("hidden").Range("DIFFICULTIES")
             End With
             
-            difficulty = 1
+            difficulty = 0
             If difficultyRange.value <> "" Then
                 For Each cell In difficultiesRange
+                    difficulty = difficulty + 1
                     If cell.value = difficultyRange.value Then
-                        GoTo END_FOR
-                    Else
-                        difficulty = difficulty + 1
+                        Exit For
                     End If
                 Next cell
+            Else
+                difficulty = 1
             End If
-END_FOR:
             
             If y > 0 Then
                 dummy = xx(0, 0, 0, 21, u, (difficulty + 1))
@@ -275,6 +275,15 @@ Public Function xx(ByVal w As Integer, _
         d = -CBool(w) Or -CBool(s) And -CBool(s >= h) And -CBool(xx(0, 0, 0, 21, 0, 0) > mm)
     End If
     
+    Dim tempArray(6) As Integer
+    tempArray(0) = 53
+    tempArray(1) = 47
+    tempArray(2) = 61
+    tempArray(3) = 51
+    tempArray(4) = 47
+    tempArray(5) = 47
+    tempArray(6) = 0
+    
     Do
         p = oo
         o = ii(p)
@@ -283,15 +292,6 @@ Public Function xx(ByVal w As Integer, _
             If q < 7 Then
                 aa = IIf(CBool(q And 2), 8, 4)
                 q = q - 1
-                
-                Dim tempArray(6) As Integer
-                tempArray(0) = 53
-                tempArray(1) = 47
-                tempArray(2) = 61
-                tempArray(3) = 51
-                tempArray(4) = 47
-                tempArray(5) = 47
-                tempArray(6) = 0
                 
                 cc = IIf(CBool(o - 9 And z), tempArray(q), 57)
                 Do
